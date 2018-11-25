@@ -3,10 +3,11 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+const port = process.env.PORT || 3000;
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing
 app.use(cors());
+
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -40,6 +41,6 @@ app.post("/contact", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("server started.");
 });
