@@ -2,10 +2,11 @@ const nodemailer = require("nodemailer");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing
-
+app.use(cors());
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -17,7 +18,7 @@ var transporter = nodemailer.createTransport({
 app.post("/contact", (req, res) => {
   var sender = req.body.name;
   var email = req.body.email;
-  var body = req.body.body;
+  var body = req.body.message;
 
   var mailOptions = {
     from: "oqtavelabs@gmail.com", // sender address
